@@ -113,7 +113,7 @@ For Uni-Sign pretraining (stages 1 to 3 on CSL-News), the CSL-News dataset, othe
 
 ## License
 
-Our changes are under the MIT licence; the upstream code is not (see `LICENSE`). The upstream repository has no licence; only the bundled `demo/rtmlib-main` carries its own Apache-2.0 licence. Upstream terms must be respected: check [ZechengLi19/Uni-Sign](https://github.com/ZechengLi19/Uni-Sign) before reuse. The PJM Corpus data is non-commercial only.
+Our changes are under the MIT licence; the upstream code is not (see `LICENSE`). The upstream repository has no licence; only the bundled `demo/rtmlib-main` carries its own Apache-2.0 licence. Upstream terms must be respected: check [ZechengLi19/Uni-Sign](https://github.com/ZechengLi19/Uni-Sign) before reuse. The PJM Corpus data is licensed under CC BY-SA 4.0.
 
 ## Authors
 
