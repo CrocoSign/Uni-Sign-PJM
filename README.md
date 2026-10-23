@@ -56,7 +56,7 @@ Python 3.10, CUDA 12.1 wheels for PyTorch 2.1.1, DeepSpeed 0.16.3. Training is l
 
 ### Train and evaluate
 
-The final models are full fine-tuning (visual encoders unfrozen) from an ASL checkpoint: AdamW, learning rate 3e-4, weight decay 0.01, batch size 8 with gradient accumulation 2, beam 5, bf16. 15 epochs for MS, 30 for SI. About 5.5 h (MS) and 8 h (SI).
+The final models are full fine-tuning (visual encoders unfrozen) from an ASL checkpoint: AdamW, learning rate 3e-4, weight decay 0.01, batch size 8 with gradient accumulation 2, beam 4 (fixed in `fine_tuning.py`, as upstream), bf16. 15 epochs for MS, 30 for SI. About 5.5 h (MS) and 8 h (SI).
 
 ```bash
 bash script/train_pjm_phase3_ms_openasl.sh
@@ -71,7 +71,7 @@ Other scripts: `script/eval_pjm.sh [ms|si|filtered]` (zero-shot evaluation of th
 
 ## Results
 
-Test set, one run per row, beam 5. **MS** (multi-signer): test signers also appear in training. **SI** (signer-independent): test signers are never seen in training. Data: 29,932 video-sentence pairs, 150 signers.
+Test set, one run per row, beam 4. **MS** (multi-signer): test signers also appear in training. **SI** (signer-independent): test signers are never seen in training. Data: 29,932 video-sentence pairs, 150 signers.
 
 | Transfer source | Split | BLEU-4 | ROUGE-L | chrF | BLEURT |
 | --- | --- | --- | --- | --- | --- |
