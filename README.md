@@ -57,7 +57,7 @@ Python 3.10, CUDA 12.1 wheels for PyTorch 2.1.1, DeepSpeed 0.16.3. Training is l
 
 ## Results
 
-Test set, beam 4, the checkpoint with the best dev BLEU-4. **MS** (multi-signer): test signers also appear in training. **SI** (signer-independent, filtered split): test signers are never seen in training. Data: 29,932 video-sentence pairs, 151 signers. BLEU is corpus-level SacreBLEU (13a); BLEURT is BLEURT-20 scaled to 0 to 100.
+Test set, beam 4, the checkpoint with the best dev BLEU-4. **MS** (multi-signer): test signers also appear in training. **SI** (signer-independent, filtered split): test signers are never seen in training. Data: 29,928 video-sentence pairs, 151 signers. BLEU is corpus-level SacreBLEU (13a); BLEURT is BLEURT-20 scaled to 0 to 100.
 
 | Transfer source | Split | BLEU-4 | ROUGE-L | chrF | BLEURT |
 | --- | --- | --- | --- | --- | --- |
