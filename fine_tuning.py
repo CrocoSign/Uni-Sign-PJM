@@ -42,7 +42,7 @@ def main(args):
         suffix = {'si': '', 'ms': '_ms', 'filtered': '_filtered'}[args.pjm_split]
         print(f"  PJM split family: {args.pjm_split} (suffix='{suffix}')")
         train_data = S2T_Dataset_PJM(
-            path=f'../CrocoSign/data/split_train{suffix}.csv',
+            path=args.pjm_train_csv or f'../CrocoSign/data/split_train{suffix}.csv',
             texts_path='../CrocoSign/data/texts_eng.h5',
             args=args,
             phase='train'
@@ -214,6 +214,7 @@ def main(args):
             wandb.finish()
         return
     print(f"Start training for {args.epochs} epochs")
+    best_epoch = 0
 
     for epoch in range(0, args.epochs):
         if args.distributed:
@@ -242,6 +243,7 @@ def main(args):
             if args.task == "SLT":
                 if max_accuracy < test_stats["bleu4"]:
                     max_accuracy = test_stats["bleu4"]
+                    best_epoch = epoch
                     if args.output_dir and utils.is_main_process():
                         checkpoint_paths = [output_dir / 'best_checkpoint.pth']
                         for checkpoint_path in checkpoint_paths:
@@ -288,6 +290,11 @@ def main(args):
                 f.write(json.dumps(log_stats) + "\n")
             if args.wandb and WANDB_AVAILABLE:
                 wandb.log(log_stats)
+
+        # Early stopping on dev BLEU-4 (SLT, single GPU): stop after `patience` epochs without a new best.
+        if args.patience > 0 and args.task == "SLT" and epoch - best_epoch >= args.patience:
+            print(f"Early stopping at epoch {epoch}: no new best dev BLEU-4 since epoch {best_epoch}")
+            break
         
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))

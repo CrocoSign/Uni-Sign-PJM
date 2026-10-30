@@ -65,7 +65,7 @@ def main():
     os.makedirs(args.tgt_dir, exist_ok=True)
 
     wholebody = Wholebody(
-        to_openpose=True,
+        to_openpose=False,  # COCO-WholeBody 133, the order datasets.py indexes
         mode=args.mode,
         backend=args.backend,
         device=args.device
