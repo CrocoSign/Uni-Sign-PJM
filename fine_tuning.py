@@ -43,19 +43,19 @@ def main(args):
         print(f"  PJM split family: {args.pjm_split} (suffix='{suffix}')")
         train_data = S2T_Dataset_PJM(
             path=args.pjm_train_csv or f'../CrocoSign/data/split_train{suffix}.csv',
-            texts_path='../CrocoSign/data/texts_eng.h5',
+            texts_path=args.pjm_texts,
             args=args,
             phase='train'
         )
         dev_data = S2T_Dataset_PJM(
             path=f'../CrocoSign/data/split_val{suffix}.csv',
-            texts_path='../CrocoSign/data/texts_eng.h5',
+            texts_path=args.pjm_texts,
             args=args,
             phase='val'
         )
         test_data =  S2T_Dataset_PJM(
             path=f'../CrocoSign/data/split_test{suffix}.csv',
-            texts_path='../CrocoSign/data/texts_eng.h5',
+            texts_path=args.pjm_texts,
             args=args,
             phase='test'
         )

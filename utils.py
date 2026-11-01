@@ -543,6 +543,10 @@ def get_args_parser():
                         help="probability that a training draw uses the --pjm_train_texts target instead of the reference")
     parser.add_argument("--pjm_train_csv", default="", type=str,
                         help="PJM train split csv overriding split_train{suffix}.csv (k-fold teachers)")
+    parser.add_argument("--pjm_texts", default="../CrocoSign/data/texts_eng.h5", type=str,
+                        help="HDF5 key -> target text for the PJM splits")
+    parser.add_argument("--pjm_lang", default="", type=str,
+                        help="target language named in the prompt (default: English, Chinese for CSL)")
     parser.add_argument("--pjm_split", default="si", choices=["si", "ms", "filtered"],
                         help="Which PJM CSV split family to use: si (signer-independent), ms (multi-speaker), filtered")
 
