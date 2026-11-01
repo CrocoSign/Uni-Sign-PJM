@@ -105,6 +105,8 @@ class Uni_Sign(nn.Module):
             self.lang = 'Chinese'
         else:
             self.lang = 'English'
+        if getattr(self.args, 'pjm_lang', ''):
+            self.lang = self.args.pjm_lang
         
         if self.args.rgb_support:
             self.rgb_support_backbone = torch.nn.Sequential(*list(torchvision.models.efficientnet_b0(pretrained=True).children())[:-2])

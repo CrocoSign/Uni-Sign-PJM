@@ -698,6 +698,17 @@ class S2T_Dataset_PJM(Base_Dataset):
                             self.video_index[key] = (tar_path, member.name)
         
         self.texts = h5py.File(texts_path, 'r')
+        # Sequence-level distillation: replace the training targets with a teacher's outputs (JSON key -> text).
+        self.text_override = None
+        if phase == 'train' and getattr(args, 'pjm_train_texts', ''):
+            import json
+            with open(args.pjm_train_texts) as f:
+                self.text_override = json.load(f)
+            absent = [k for k in self.keys if k not in self.text_override]
+            assert not absent, f"{len(absent)} train keys missing from {args.pjm_train_texts}, e.g. {absent[:3]}"
+            # Mixed distillation: each draw takes the teacher text with this probability, else the reference.
+            self.text_override_p = getattr(args, 'pjm_train_texts_p', 1.0)
+            print(f"[PJM:{phase}] training targets from {args.pjm_train_texts}, p={self.text_override_p}")
         self.rgb_dir = None
         self.data_transform = transforms.Compose([
             transforms.ToTensor(),
@@ -718,7 +729,10 @@ class S2T_Dataset_PJM(Base_Dataset):
 
     def __getitem__(self, index):
         key = self.keys[index]
-        text = self.texts[key][()].decode('utf-8')
+        if self.text_override is not None and random.random() < self.text_override_p:
+            text = self.text_override[key]
+        else:
+            text = self.texts[key][()].decode('utf-8')
         pose_sample, support_rgb_dict = self.load_pose(key + '.pkl')
         return key, pose_sample, text, '', support_rgb_dict
     

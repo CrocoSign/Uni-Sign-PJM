@@ -40,7 +40,7 @@ pose_dirs = {
             "CSL_News": './dataset/CSL_News/pose_format',
             "CSL_Daily": './dataset/CSL_Daily/pose_format',
             "WLASL": "./dataset/WLASL/pose_format",
-            "How2Sign": "./dataset/WLASL/pose_format",
+            "How2Sign": "./dataset/How2Sign/{}-pose-rtmpose-192",
             "OpenASL": "./dataset/WLASL/pose_format",
             "PJM": "./dataset/PJM/pose_format",
 }

@@ -535,6 +535,18 @@ def get_args_parser():
     parser.add_argument("--num_examples", default=5, type=int, help="Number of reference/prediction examples to print during eval")
 
     # PJM split selection
+    parser.add_argument("--patience", default=0, type=int,
+                        help="stop after this many epochs without a new best dev BLEU-4 (0 = off)")
+    parser.add_argument("--pjm_train_texts", default="", type=str,
+                        help="JSON key -> text that replaces the PJM training targets (distillation)")
+    parser.add_argument("--pjm_train_texts_p", default=1.0, type=float,
+                        help="probability that a training draw uses the --pjm_train_texts target instead of the reference")
+    parser.add_argument("--pjm_train_csv", default="", type=str,
+                        help="PJM train split csv overriding split_train{suffix}.csv (k-fold teachers)")
+    parser.add_argument("--pjm_texts", default="../CrocoSign/data/texts_eng.h5", type=str,
+                        help="HDF5 key -> target text for the PJM splits")
+    parser.add_argument("--pjm_lang", default="", type=str,
+                        help="target language named in the prompt (default: English, Chinese for CSL)")
     parser.add_argument("--pjm_split", default="si", choices=["si", "ms", "filtered"],
                         help="Which PJM CSV split family to use: si (signer-independent), ms (multi-speaker), filtered")
 
