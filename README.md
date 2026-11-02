@@ -2,7 +2,7 @@
 
 Fork of [Uni-Sign](https://github.com/ZechengLi19/Uni-Sign) (Li et al., ICLR 2025, [arXiv:2501.15187](https://arxiv.org/abs/2501.15187)) adapted to translate Polish Sign Language (PJM) into English. All model code, pretrained checkpoints and the method are the work of the Uni-Sign authors; please cite their paper (see Citation). Our changes are listed below.
 
-Part of CrocoSign, our PJATK engineering thesis. All repositories are under [github.com/crocosign](https://github.com/crocosign), project site https://crocosign.github.io:
+Part of CrocoSign, our PJATK engineering thesis. All repositories are under [github.com/crocosign](https://github.com/crocosign), project site https://crocosign.pl:
 
 CrocoSign (data preparation) -> **Uni-Sign-PJM** / SpaMo-PJM (training) -> pjm-models (inference) -> croco-sign-backend / croco-sign-frontend (app).
 
